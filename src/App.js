@@ -13,30 +13,25 @@ function App() {
     const [search, setSearch] = useState('')
 
     useEffect(()=>{
-   
-    }, [])
-
-    const setAndSaveItems = (newItems) => {
-      setItems(newItems);
-      localStorage.setItem('shoppinglist', JSON.stringify(newItems));
-    }
+      localStorage.setItem('shoppinglist', JSON.stringify(items))
+    }, [items])
 
     const addItem = (item) => {
       const id = items.length ? items[items.length-1].id + 1 : 1;
       const myNewItem = {id, checked:false, item};
       const listItems = [...items, myNewItem];
-      setAndSaveItems(listItems);
+      setItems(listItems);
     }
 
     const handleId = (id) => {
       const listItems = items.map((item) => item.id === id ? {...item, checked: !item.checked} : item);
-      setAndSaveItems(listItems);
+      setItems(listItems);
   }
 
     const handleDelete = (id) => {
       const listItems = items.filter((item) => 
       item.id !== id);
-      setAndSaveItems(listItems);
+      setItems(listItems);
       }
 
     const handleSubmit = (e) => {
@@ -58,7 +53,7 @@ function App() {
             checked: false,
             item: "item 2"
           }];
-        setAndSaveItems(startList)
+          setItems(startList)
         }
       else {return};
       }
